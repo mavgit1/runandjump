@@ -33377,17 +33377,295 @@ Object.keys(_textHtml).forEach(function (key) {
     }
   });
 });
-},{"@pixi/mixin-cache-as-bitmap":"../node_modules/@pixi/mixin-cache-as-bitmap/lib/index.mjs","@pixi/mixin-get-child-by-name":"../node_modules/@pixi/mixin-get-child-by-name/lib/index.mjs","@pixi/mixin-get-global-position":"../node_modules/@pixi/mixin-get-global-position/lib/index.mjs","./filters.mjs":"../node_modules/pixi.js/lib/filters.mjs","@pixi/accessibility":"../node_modules/@pixi/accessibility/lib/index.mjs","@pixi/app":"../node_modules/@pixi/app/lib/index.mjs","@pixi/assets":"../node_modules/@pixi/assets/lib/index.mjs","@pixi/compressed-textures":"../node_modules/@pixi/compressed-textures/lib/index.mjs","@pixi/core":"../node_modules/@pixi/core/lib/index.mjs","@pixi/display":"../node_modules/@pixi/display/lib/index.mjs","@pixi/events":"../node_modules/@pixi/events/lib/index.mjs","@pixi/extract":"../node_modules/@pixi/extract/lib/index.mjs","@pixi/filter-alpha":"../node_modules/@pixi/filter-alpha/lib/index.mjs","@pixi/filter-blur":"../node_modules/@pixi/filter-blur/lib/index.mjs","@pixi/filter-color-matrix":"../node_modules/@pixi/filter-color-matrix/lib/index.mjs","@pixi/filter-displacement":"../node_modules/@pixi/filter-displacement/lib/index.mjs","@pixi/filter-fxaa":"../node_modules/@pixi/filter-fxaa/lib/index.mjs","@pixi/filter-noise":"../node_modules/@pixi/filter-noise/lib/index.mjs","@pixi/graphics":"../node_modules/@pixi/graphics/lib/index.mjs","@pixi/mesh":"../node_modules/@pixi/mesh/lib/index.mjs","@pixi/mesh-extras":"../node_modules/@pixi/mesh-extras/lib/index.mjs","@pixi/particle-container":"../node_modules/@pixi/particle-container/lib/index.mjs","@pixi/prepare":"../node_modules/@pixi/prepare/lib/index.mjs","@pixi/sprite":"../node_modules/@pixi/sprite/lib/index.mjs","@pixi/sprite-animated":"../node_modules/@pixi/sprite-animated/lib/index.mjs","@pixi/sprite-tiling":"../node_modules/@pixi/sprite-tiling/lib/index.mjs","@pixi/spritesheet":"../node_modules/@pixi/spritesheet/lib/index.mjs","@pixi/text":"../node_modules/@pixi/text/lib/index.mjs","@pixi/text-bitmap":"../node_modules/@pixi/text-bitmap/lib/index.mjs","@pixi/text-html":"../node_modules/@pixi/text-html/lib/index.mjs"}],"index.js":[function(require,module,exports) {
-var PIXI = require('pixi.js');
-var app = new PIXI.Application({
-  width: 256,
-  height: 256,
-  antialias: true,
-  transparent: false,
-  resolution: 1
+},{"@pixi/mixin-cache-as-bitmap":"../node_modules/@pixi/mixin-cache-as-bitmap/lib/index.mjs","@pixi/mixin-get-child-by-name":"../node_modules/@pixi/mixin-get-child-by-name/lib/index.mjs","@pixi/mixin-get-global-position":"../node_modules/@pixi/mixin-get-global-position/lib/index.mjs","./filters.mjs":"../node_modules/pixi.js/lib/filters.mjs","@pixi/accessibility":"../node_modules/@pixi/accessibility/lib/index.mjs","@pixi/app":"../node_modules/@pixi/app/lib/index.mjs","@pixi/assets":"../node_modules/@pixi/assets/lib/index.mjs","@pixi/compressed-textures":"../node_modules/@pixi/compressed-textures/lib/index.mjs","@pixi/core":"../node_modules/@pixi/core/lib/index.mjs","@pixi/display":"../node_modules/@pixi/display/lib/index.mjs","@pixi/events":"../node_modules/@pixi/events/lib/index.mjs","@pixi/extract":"../node_modules/@pixi/extract/lib/index.mjs","@pixi/filter-alpha":"../node_modules/@pixi/filter-alpha/lib/index.mjs","@pixi/filter-blur":"../node_modules/@pixi/filter-blur/lib/index.mjs","@pixi/filter-color-matrix":"../node_modules/@pixi/filter-color-matrix/lib/index.mjs","@pixi/filter-displacement":"../node_modules/@pixi/filter-displacement/lib/index.mjs","@pixi/filter-fxaa":"../node_modules/@pixi/filter-fxaa/lib/index.mjs","@pixi/filter-noise":"../node_modules/@pixi/filter-noise/lib/index.mjs","@pixi/graphics":"../node_modules/@pixi/graphics/lib/index.mjs","@pixi/mesh":"../node_modules/@pixi/mesh/lib/index.mjs","@pixi/mesh-extras":"../node_modules/@pixi/mesh-extras/lib/index.mjs","@pixi/particle-container":"../node_modules/@pixi/particle-container/lib/index.mjs","@pixi/prepare":"../node_modules/@pixi/prepare/lib/index.mjs","@pixi/sprite":"../node_modules/@pixi/sprite/lib/index.mjs","@pixi/sprite-animated":"../node_modules/@pixi/sprite-animated/lib/index.mjs","@pixi/sprite-tiling":"../node_modules/@pixi/sprite-tiling/lib/index.mjs","@pixi/spritesheet":"../node_modules/@pixi/spritesheet/lib/index.mjs","@pixi/text":"../node_modules/@pixi/text/lib/index.mjs","@pixi/text-bitmap":"../node_modules/@pixi/text-bitmap/lib/index.mjs","@pixi/text-html":"../node_modules/@pixi/text-html/lib/index.mjs"}],"../node_modules/@pixi/graphics-extras/lib/drawChamferRect.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-document.body.appendChild(app.view);
-},{"pixi.js":"../node_modules/pixi.js/lib/index.mjs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+exports.drawChamferRect = drawChamferRect;
+function drawChamferRect(x, y, width, height, chamfer) {
+  if (chamfer <= 0) return this.drawRect(x, y, width, height);
+  const inset = Math.min(chamfer, Math.min(width, height) / 2),
+    right = x + width,
+    bottom = y + height,
+    points = [x + inset, y, right - inset, y, right, y + inset, right, bottom - inset, right - inset, bottom, x + inset, bottom, x, bottom - inset, x, y + inset];
+  for (let i = points.length - 1; i >= 2; i -= 2) points[i] === points[i - 2] && points[i - 1] === points[i - 3] && points.splice(i - 1, 2);
+  return this.drawPolygon(points);
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/drawFilletRect.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawFilletRect = drawFilletRect;
+function drawFilletRect(x, y, width, height, fillet) {
+  if (fillet === 0) return this.drawRect(x, y, width, height);
+  const maxFillet = Math.min(width, height) / 2,
+    inset = Math.min(maxFillet, Math.max(-maxFillet, fillet)),
+    right = x + width,
+    bottom = y + height,
+    dir = inset < 0 ? -inset : 0,
+    size = Math.abs(inset);
+  return this.moveTo(x, y + size).arcTo(x + dir, y + dir, x + size, y, size).lineTo(right - size, y).arcTo(right - dir, y + dir, right, y + size, size).lineTo(right, bottom - size).arcTo(right - dir, bottom - dir, x + width - size, bottom, size).lineTo(x + size, bottom).arcTo(x + dir, bottom - dir, x, bottom - size, size).closePath();
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/drawRegularPolygon.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawRegularPolygon = drawRegularPolygon;
+function drawRegularPolygon(x, y, radius, sides, rotation = 0) {
+  sides = Math.max(sides | 0, 3);
+  const startAngle = -1 * Math.PI / 2 + rotation,
+    delta = Math.PI * 2 / sides,
+    polygon = [];
+  for (let i = 0; i < sides; i++) {
+    const angle = i * delta + startAngle;
+    polygon.push(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+  }
+  return this.drawPolygon(polygon);
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/drawRoundedPolygon.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawRoundedPolygon = drawRoundedPolygon;
+function drawRoundedPolygon(x, y, radius, sides, corner, rotation = 0) {
+  if (sides = Math.max(sides | 0, 3), corner <= 0) return this.drawRegularPolygon(x, y, radius, sides, rotation);
+  const sideLength = radius * Math.sin(Math.PI / sides) - 1e-3;
+  corner = Math.min(corner, sideLength);
+  const startAngle = -1 * Math.PI / 2 + rotation,
+    delta = Math.PI * 2 / sides,
+    internalAngle = (sides - 2) * Math.PI / sides / 2;
+  for (let i = 0; i < sides; i++) {
+    const angle = i * delta + startAngle,
+      x0 = x + radius * Math.cos(angle),
+      y0 = y + radius * Math.sin(angle),
+      a1 = angle + Math.PI + internalAngle,
+      a2 = angle - Math.PI - internalAngle,
+      x1 = x0 + corner * Math.cos(a1),
+      y1 = y0 + corner * Math.sin(a1),
+      x3 = x0 + corner * Math.cos(a2),
+      y3 = y0 + corner * Math.sin(a2);
+    i === 0 ? this.moveTo(x1, y1) : this.lineTo(x1, y1), this.quadraticCurveTo(x0, y0, x3, y3);
+  }
+  return this.closePath();
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/drawRoundedShape.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawRoundedShape = drawRoundedShape;
+function roundedShapeArc(g, points, radius) {
+  const vecFrom = (p, pp) => {
+      const x = pp.x - p.x,
+        y = pp.y - p.y,
+        len = Math.sqrt(x * x + y * y),
+        nx = x / len,
+        ny = y / len;
+      return {
+        len,
+        nx,
+        ny
+      };
+    },
+    sharpCorner = (i, p) => {
+      i === 0 ? g.moveTo(p.x, p.y) : g.lineTo(p.x, p.y);
+    };
+  let p1 = points[points.length - 1];
+  for (let i = 0; i < points.length; i++) {
+    const p2 = points[i % points.length],
+      pRadius = p2.radius ?? radius;
+    if (pRadius <= 0) {
+      sharpCorner(i, p2), p1 = p2;
+      continue;
+    }
+    const p3 = points[(i + 1) % points.length],
+      v1 = vecFrom(p2, p1),
+      v2 = vecFrom(p2, p3);
+    if (v1.len < 1e-4 || v2.len < 1e-4) {
+      sharpCorner(i, p2), p1 = p2;
+      continue;
+    }
+    let angle = Math.asin(v1.nx * v2.ny - v1.ny * v2.nx),
+      radDirection = 1,
+      drawDirection = !1;
+    v1.nx * v2.nx - v1.ny * -v2.ny < 0 ? angle < 0 ? angle = Math.PI + angle : (angle = Math.PI - angle, radDirection = -1, drawDirection = !0) : angle > 0 && (radDirection = -1, drawDirection = !0);
+    const halfAngle = angle / 2;
+    let cRadius,
+      lenOut = Math.abs(Math.cos(halfAngle) * pRadius / Math.sin(halfAngle));
+    lenOut > Math.min(v1.len / 2, v2.len / 2) ? (lenOut = Math.min(v1.len / 2, v2.len / 2), cRadius = Math.abs(lenOut * Math.sin(halfAngle) / Math.cos(halfAngle))) : cRadius = pRadius;
+    const cX = p2.x + v2.nx * lenOut + -v2.ny * cRadius * radDirection,
+      cY = p2.y + v2.ny * lenOut + v2.nx * cRadius * radDirection,
+      startAngle = Math.atan2(v1.ny, v1.nx) + Math.PI / 2 * radDirection,
+      endAngle = Math.atan2(v2.ny, v2.nx) - Math.PI / 2 * radDirection;
+    i === 0 && g.moveTo(cX + Math.cos(startAngle) * cRadius, cY + Math.sin(startAngle) * cRadius), g.arc(cX, cY, cRadius, startAngle, endAngle, drawDirection), p1 = p2;
+  }
+}
+function roundedShapeQuadraticCurve(g, points, radius) {
+  const distance = (p1, p2) => Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2),
+    pointLerp = (p1, p2, t) => ({
+      x: p1.x + (p2.x - p1.x) * t,
+      y: p1.y + (p2.y - p1.y) * t
+    }),
+    numPoints = points.length;
+  for (let i = 0; i < numPoints; i++) {
+    const thisPoint = points[(i + 1) % numPoints],
+      pRadius = thisPoint.radius ?? radius;
+    if (pRadius <= 0) {
+      i === 0 ? g.moveTo(thisPoint.x, thisPoint.y) : g.lineTo(thisPoint.x, thisPoint.y);
+      continue;
+    }
+    const lastPoint = points[i],
+      nextPoint = points[(i + 2) % numPoints],
+      lastEdgeLength = distance(lastPoint, thisPoint);
+    let start;
+    if (lastEdgeLength < 1e-4) start = thisPoint;else {
+      const lastOffsetDistance = Math.min(lastEdgeLength / 2, pRadius);
+      start = pointLerp(thisPoint, lastPoint, lastOffsetDistance / lastEdgeLength);
+    }
+    const nextEdgeLength = distance(nextPoint, thisPoint);
+    let end;
+    if (nextEdgeLength < 1e-4) end = thisPoint;else {
+      const nextOffsetDistance = Math.min(nextEdgeLength / 2, pRadius);
+      end = pointLerp(thisPoint, nextPoint, nextOffsetDistance / nextEdgeLength);
+    }
+    i === 0 ? g.moveTo(start.x, start.y) : g.lineTo(start.x, start.y), g.quadraticCurveTo(thisPoint.x, thisPoint.y, end.x, end.y);
+  }
+}
+function drawRoundedShape(points, radius, useQuadraticCurve) {
+  return points.length < 3 ? this : (useQuadraticCurve ? roundedShapeQuadraticCurve(this, points, radius) : roundedShapeArc(this, points, radius), this.closePath());
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/drawStar.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawStar = drawStar;
+var _core = require("@pixi/core");
+class Star extends _core.Polygon {
+  /**
+   * @param x - Center X position of the star
+   * @param y - Center Y position of the star
+   * @param points - The number of points of the star, must be > 1
+   * @param radius - The outer radius of the star
+   * @param innerRadius - The inner radius between points, default half `radius`
+   * @param rotation - The rotation of the star in radians, where 0 is vertical
+   */
+  constructor(x, y, points, radius, innerRadius, rotation = 0) {
+    innerRadius = innerRadius || radius / 2;
+    const startAngle = -1 * Math.PI / 2 + rotation,
+      len = points * 2,
+      delta = _core.PI_2 / len,
+      polygon = [];
+    for (let i = 0; i < len; i++) {
+      const r = i % 2 ? innerRadius : radius,
+        angle = i * delta + startAngle;
+      polygon.push(x + r * Math.cos(angle), y + r * Math.sin(angle));
+    }
+    super(polygon);
+  }
+}
+function drawStar(x, y, points, radius, innerRadius, rotation = 0) {
+  return this.drawPolygon(new Star(x, y, points, radius, innerRadius, rotation));
+}
+},{"@pixi/core":"../node_modules/@pixi/core/lib/index.mjs"}],"../node_modules/@pixi/graphics-extras/lib/drawTorus.mjs":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.drawTorus = drawTorus;
+function drawTorus(x, y, innerRadius, outerRadius, startArc = 0, endArc = Math.PI * 2) {
+  return Math.abs(endArc - startArc) >= Math.PI * 2 ? this.drawCircle(x, y, outerRadius).beginHole().drawCircle(x, y, innerRadius).endHole() : (this.finishPoly(), this.arc(x, y, innerRadius, endArc, startArc, !0).arc(x, y, outerRadius, startArc, endArc, !1).finishPoly(), this);
+}
+},{}],"../node_modules/@pixi/graphics-extras/lib/index.mjs":[function(require,module,exports) {
+"use strict";
+
+var _graphics = require("@pixi/graphics");
+var _drawChamferRect = require("./drawChamferRect.mjs");
+var _drawFilletRect = require("./drawFilletRect.mjs");
+var _drawRegularPolygon = require("./drawRegularPolygon.mjs");
+var _drawRoundedPolygon = require("./drawRoundedPolygon.mjs");
+var _drawRoundedShape = require("./drawRoundedShape.mjs");
+var _drawStar = require("./drawStar.mjs");
+var _drawTorus = require("./drawTorus.mjs");
+Object.defineProperties(_graphics.Graphics.prototype, {
+  drawTorus: {
+    value: _drawTorus.drawTorus
+  },
+  drawChamferRect: {
+    value: _drawChamferRect.drawChamferRect
+  },
+  drawFilletRect: {
+    value: _drawFilletRect.drawFilletRect
+  },
+  drawRegularPolygon: {
+    value: _drawRegularPolygon.drawRegularPolygon
+  },
+  drawRoundedPolygon: {
+    value: _drawRoundedPolygon.drawRoundedPolygon
+  },
+  drawRoundedShape: {
+    value: _drawRoundedShape.drawRoundedShape
+  },
+  drawStar: {
+    value: _drawStar.drawStar
+  }
+});
+},{"@pixi/graphics":"../node_modules/@pixi/graphics/lib/index.mjs","./drawChamferRect.mjs":"../node_modules/@pixi/graphics-extras/lib/drawChamferRect.mjs","./drawFilletRect.mjs":"../node_modules/@pixi/graphics-extras/lib/drawFilletRect.mjs","./drawRegularPolygon.mjs":"../node_modules/@pixi/graphics-extras/lib/drawRegularPolygon.mjs","./drawRoundedPolygon.mjs":"../node_modules/@pixi/graphics-extras/lib/drawRoundedPolygon.mjs","./drawRoundedShape.mjs":"../node_modules/@pixi/graphics-extras/lib/drawRoundedShape.mjs","./drawStar.mjs":"../node_modules/@pixi/graphics-extras/lib/drawStar.mjs","./drawTorus.mjs":"../node_modules/@pixi/graphics-extras/lib/drawTorus.mjs"}],"index.js":[function(require,module,exports) {
+var PIXI = require('pixi.js');
+require('@pixi/graphics-extras');
+function createPixiApp() {
+  //Create the App Window with some basic parameters so that the app is full screen.
+  var app = new PIXI.Application({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    antialias: true,
+    transparent: false,
+    resolution: 1,
+    backgroundColor: 0x23395D
+  });
+  app.view.style.position = 'absolute';
+  app.view.style.top = '0';
+  app.view.style.left = '0';
+  return app;
+}
+function addRectangleToStage(app, x, y, width, height, color) {
+  // Create a new Graphics object, set size, position and color and add it to the stage
+  var rectangle = new PIXI.Graphics();
+  rectangle.beginFill(color);
+  rectangle.drawRect(x, y, width, height);
+  rectangle.endFill();
+  app.stage.addChild(rectangle);
+}
+function addTorusToStage(app, x, y, radiusInner, radiusOuter, startArc, endArc, color) {
+  var torus = new PIXI.Graphics();
+  torus.beginFill(color);
+  torus.drawTorus(x, y, radiusInner, radiusOuter, startArc, endArc);
+  torus.endFill();
+  app.stage.addChild(torus);
+}
+function main() {
+  var app = createPixiApp();
+  addRectangleToStage(app, 50, 50, 100, 100, 0xFF3300);
+  document.body.appendChild(app.view);
+  addTorusToStage(app, 300, 300, 60, 100, 0.6, Math.PI * 1.7, 0x3498db); // A nice blue torus
+  addTorusToStage(app, 300, 300, 40, 70, 0, Math.PI * 1.5, 0xe74c3c); // A smaller red torus inside the blue one
+  //app.renderer.backgroundColor = 0x23395D;
+
+  //app.renderer.resize(500, 500);
+}
+main();
+},{"pixi.js":"../node_modules/pixi.js/lib/index.mjs","@pixi/graphics-extras":"../node_modules/@pixi/graphics-extras/lib/index.mjs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -33412,7 +33690,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53242" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53854" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

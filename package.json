@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/mavgit1/runandjump#readme",
   "dependencies": {
+    "@pixi/graphics-extras": "^7.4.0",
     "pixi.js": "^7.4.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
-  }  
+  }
 }
