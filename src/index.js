@@ -44,8 +44,8 @@ function main() {
     const app = createPixiApp();
     addRectangleToStage(app, 50, 50, 100, 100, 0xFF3300);
     document.body.appendChild(app.view);
-    addTorusToStage(app, 300, 300, 60, 100, 0.6, Math.PI * 1.7, 0x3498db); // A nice blue torus
-    addTorusToStage(app, 300, 300, 40, 70, 0, Math.PI * 1.5, 0xe74c3c); // A smaller red torus inside the blue one
+    addTorusToStage(app, 300, 300, 60, 100, 0.6, Math.PI * 1.7, 0x3498db);
+    addTorusToStage(app, 300, 300, 40, 70, 0, Math.PI * 1.5, 0xe74c3c);
     //app.renderer.backgroundColor = 0x23395D;
 
     //app.renderer.resize(500, 500);
