@@ -33654,15 +33654,38 @@ function addTorusToStage(app, x, y, radiusInner, radiusOuter, startArc, endArc, 
   torus.endFill();
   app.stage.addChild(torus);
 }
+// TAG #1 (Creating Rand Object at intervall)
+// function addRandomSquare(app, size, color) {
+//     const square = new PIXI.Graphics();
+//     square.beginFill(color);
+//     square.drawRect(0, 0, size, size);
+//     square.endFill();
+//     square.x = Math.random() * (app.screen.width - size);
+//     square.y = Math.random() * (app.screen.height - size);
+//     app.stage.addChild(square);
+// }
+
+// let elapsed = 0.0;
+// const interval = 1; // Interval in milliseconds
+
 function main() {
   var app = createPixiApp();
   addRectangleToStage(app, 50, 50, 100, 100, 0xFF3300);
   document.body.appendChild(app.view);
-  addTorusToStage(app, 300, 300, 60, 100, 0.6, Math.PI * 1.7, 0x3498db); // A nice blue torus
-  addTorusToStage(app, 300, 300, 40, 70, 0, Math.PI * 1.5, 0xe74c3c); // A smaller red torus inside the blue one
-  //app.renderer.backgroundColor = 0x23395D;
+  addTorusToStage(app, 300, 300, 60, 100, 0.6, Math.PI * 1.7, 0x3498db);
+  addTorusToStage(app, 300, 300, 40, 70, 0, Math.PI * 1.5, 0xe74c3c);
 
+  //app.renderer.backgroundColor = 0x23395D;
   //app.renderer.resize(500, 500);
+
+  // TAG #1 (Creating Rand Object at intervall)
+  // app.ticker.add((delta) => {
+  //     elapsed += delta;
+  //     if (elapsed >= interval / 16.66667) { // Approximately convert ms to frames (60fps -> 16.66667ms per frame)
+  //         addRandomSquare(app, 10, 0xFFFFFF);
+  //         elapsed = 0;
+  //     }
+  // });
 }
 main();
 },{"pixi.js":"../node_modules/pixi.js/lib/index.mjs","@pixi/graphics-extras":"../node_modules/@pixi/graphics-extras/lib/index.mjs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -33690,7 +33713,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53854" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51065" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
