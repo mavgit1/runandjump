@@ -110,13 +110,14 @@ function createFrames(texture) {
 
 async function main() {
     const app = await createPixiApp();
-    createGameContainer(app);
-    
-    // const test = await loadAssetAndSetup(characterRun, 200, 210);
-    // app.stage.addChild(test);
+    const { frameBackground, gameContainer } = await createGameContainer(app);
 
-    // const test2 = await loadAssetAndSetup(characterDuck, 100, 210);
-    // app.stage.addChild(test2);
+    
+    const test = await loadAssetAndSetup(characterRun, 200, 210);
+    gameContainer.addChild(test);
+
+    const test2 = await loadAssetAndSetup(characterDuck, 100, 210);
+    gameContainer.addChild(test2);
 }
 
 main().catch(console.error); 

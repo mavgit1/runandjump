@@ -33790,7 +33790,7 @@ function main() {
 }
 function _main() {
   _main = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-    var app;
+    var app, _yield$createGameCont, frameBackground, gameContainer, test, test2;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
@@ -33798,14 +33798,23 @@ function _main() {
           return createPixiApp();
         case 2:
           app = _context4.sent;
-          createGameContainer(app);
-
-          // const test = await loadAssetAndSetup(characterRun, 200, 210);
-          // app.stage.addChild(test);
-
-          // const test2 = await loadAssetAndSetup(characterDuck, 100, 210);
-          // app.stage.addChild(test2);
-        case 4:
+          _context4.next = 5;
+          return createGameContainer(app);
+        case 5:
+          _yield$createGameCont = _context4.sent;
+          frameBackground = _yield$createGameCont.frameBackground;
+          gameContainer = _yield$createGameCont.gameContainer;
+          _context4.next = 10;
+          return loadAssetAndSetup(_characterRun.default, 200, 210);
+        case 10:
+          test = _context4.sent;
+          gameContainer.addChild(test);
+          _context4.next = 14;
+          return loadAssetAndSetup(_characterDuck.default, 100, 210);
+        case 14:
+          test2 = _context4.sent;
+          gameContainer.addChild(test2);
+        case 16:
         case "end":
           return _context4.stop();
       }
@@ -33839,7 +33848,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52416" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57590" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
